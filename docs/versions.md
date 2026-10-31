@@ -1,6 +1,6 @@
 # 版本与来源
 
-状态：依赖兼容性验证进行中，未完成整体版本锁定。
+状态：Java Core 与 Spring Boot 模型服务契约通过；整体 Compose/前端版本锁定仍进行中。
 
 | 项目 | 版本 / 摘要 | 当前证据 |
 |---|---|---|
@@ -12,3 +12,5 @@
 局部工具只解压在本次工作目录，不修改系统 Java、全局 Maven 或 PATH。交付物使用标准公开镜像与 Maven 坐标，不依赖该绝对目录。
 
 官方来源：[Core 制品目录](https://repo.maven.apache.org/maven2/com/openjiuwen/agent-core-java/0.1.16/)、[Amazon Corretto 下载与 SHA256](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html)、[Maven 公开发行目录](https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.16/)、[Maven 官方镜像](https://hub.docker.com/_/maven/)。
+
+后端基础：Spring Boot 4.0.7、Jackson 2.21.5 BOM、OTel 1.64.0 BOM、JUnit 6.0.3；模型服务 7 项定向测试通过。没有将此结果扩大为真实模型质量验证。
