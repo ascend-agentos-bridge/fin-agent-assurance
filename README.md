@@ -1,6 +1,6 @@
 # 智能体质量保障演示平台：开发准备交付
 
-日期：2026-10-31。当前阶段为官方框架调研、架构与 UCD；**产品代码、Compose 实现及完整链路尚未开发或验收**。
+日期：2026-10-31。当前阶段为官方框架调研、架构与 UCD；Java Core 接入与契约测试正在实现；双站点、Compose 和完整链路尚未验收。
 
 ## 首先审阅
 
@@ -40,12 +40,12 @@
 | 三张 SVG 设计稿 | XML 解析通过；未进行浏览器视觉验收 |
 | 本机 Docker | Engine 29.6.1、Compose v5.3.0，可连接 |
 | 本机 Java / Maven | 只有 Java 8，Maven 不在 PATH；产品拟以匹配 JDK 容器构建 |
-| Java/前端构建、模型能力测试 | 未执行 |
+| Java/前端构建、模型能力测试 | Java Core 契约测试 3/3 通过；前端与真实模型尚未执行 |
 | Trace/实验/评分/告警触发恢复 | 未执行 |
 | 真实模型质量、SMTP 邮件送达 | 未验证；需要有效用户配置 |
-| 产品工作分支、提交、推送 | 未创建；已确认目标远端，当前为空仓库，尚未推送 |
+| 产品工作分支、提交、推送 | codex/agent-assurance 已推送设计与计划，ea7036570ae07a31c0a652f25b26f040c98632d2 |
 
-目标远端：`git@github.com:ascend-agentos-bridge/fin-agent-assurance.git`；[GitHub 仓库](https://github.com/ascend-agentos-bridge/fin-agent-assurance)。GitHub API 已确认仓库存在、当前分支列表为空，默认分支配置为 `main`，连接器报告具备 push 权限；这不等于实际推送已通过。SSH 22 端口在当前执行沙箱被阻止，仓库核查使用 GitHub 连接器完成。设计确认后在独立工作分支逐阶段提交。
+目标远端：`git@github.com:ascend-agentos-bridge/fin-agent-assurance.git`；[GitHub 仓库](https://github.com/ascend-agentos-bridge/fin-agent-assurance)。已通过 SSH 实际推送并从 GitHub API 读回工作分支。普通沙箱限制 SSH/DNS，授权网络执行可用；构建与测试结果逐阶段记录。
 
 ## 后续开发顺序
 

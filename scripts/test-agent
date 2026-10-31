@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+project_dir="$(cd "$(dirname "$0")/.." && pwd)"
+build_dir="$(mktemp -d "${TMPDIR:-/tmp}/assurance-build.XXXXXX")"
+trap 'rm -rf "${build_dir:?}"' EXIT
+# Docker Desktop can reject bind reads from cloud-synced Documents folders.
+# Copy source into a short-lived build context; keep build state off the checkout.
+tar -C "$project_dir" --exclude=target --exclude=logs -cf - agent | tar -C "$build_dir" -xf -
+status=0
+docker run --rm --memory=2g --cpus=2 -e MAVEN_OPTS=-Xmx768m \
+  -v "$build_dir:/workspace" -v "${ASSURANCE_MAVEN_CACHE_VOLUME:-fin-assurance-maven-cache}:/root/.m2" \
+  -w /workspace maven:3.9.16-eclipse-temurin-17 \
+  mvn -B -ntp -f agent/pom.xml -DargLine=-Xmx512m "$@" || status=$?
+mkdir -p "$project_dir/agent/target"
+if [ -d "$build_dir/agent/target/surefire-reports" ]; then
+  cp -R "$build_dir/agent/target/surefire-reports" "$project_dir/agent/target/"
+fi
+exit "$status"
