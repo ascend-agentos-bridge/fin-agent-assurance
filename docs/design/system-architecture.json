@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "智能体质量保障平台 · 拟建系统架构",
+    "locale": "zh-CN",
+    "output": "outputs/agent-assurance/docs/design/system-architecture.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "portal",
+      "type": "frontend",
+      "label": "质量保障 Portal",
+      "sublabel": "独立站点 :8080",
+      "pos": [
+        40,
+        40
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "workbench",
+      "type": "frontend",
+      "label": "信贷工作台",
+      "sublabel": "独立站点 :8081",
+      "pos": [
+        430,
+        40
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "model",
+      "type": "external",
+      "label": "真实模型服务",
+      "sublabel": "用户配置 / HTTPS",
+      "pos": [
+        820,
+        40
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "langfuse",
+      "type": "backend",
+      "label": "Langfuse 服务栈",
+      "sublabel": "原生追踪与评测 :3000",
+      "pos": [
+        40,
+        280
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "agent",
+      "type": "backend",
+      "label": "Java Agent 服务",
+      "sublabel": "Core + 应用适配 :8082",
+      "pos": [
+        430,
+        280
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "bank",
+      "type": "backend",
+      "label": "Mock 银行工具层",
+      "sublabel": "合成案例 / 可恢复故障",
+      "pos": [
+        820,
+        280
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "grafana",
+      "type": "backend",
+      "label": "Grafana",
+      "sublabel": "原生指标与告警 :3001",
+      "pos": [
+        40,
+        520
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "prometheus",
+      "type": "backend",
+      "label": "Prometheus",
+      "sublabel": "真实指标采集 :9090",
+      "pos": [
+        430,
+        520
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "store",
+      "type": "database",
+      "label": "应用数据卷",
+      "sublabel": "加密配置 / 运行状态",
+      "pos": [
+        820,
+        520
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "smtp",
+      "type": "external",
+      "label": "用户 SMTP 服务",
+      "sublabel": "服务端凭据 / 可选邮件",
+      "pos": [
+        40,
+        740
+      ],
+      "size": [
+        180,
+        70
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "portal-workbench",
+      "from": "portal",
+      "to": "workbench",
+      "label": "新标签页",
+      "variant": "dashed"
+    },
+    {
+      "id": "portal-langfuse",
+      "from": "portal",
+      "to": "langfuse",
+      "label": "新标签页",
+      "variant": "dashed"
+    },
+    {
+      "id": "portal-grafana",
+      "from": "portal",
+      "to": "grafana",
+      "label": "新标签页",
+      "variant": "dashed"
+    },
+    {
+      "id": "ui-agent",
+      "from": "workbench",
+      "to": "agent",
+      "label": "HTTP / SSE",
+      "variant": "emphasis"
+    },
+    {
+      "id": "agent-model",
+      "from": "agent",
+      "to": "model",
+      "label": "Core 模型调用",
+      "variant": "security"
+    },
+    {
+      "id": "agent-bank",
+      "from": "agent",
+      "to": "bank",
+      "label": "实际工具执行",
+      "variant": "emphasis"
+    },
+    {
+      "id": "agent-tracing",
+      "from": "agent",
+      "to": "langfuse",
+      "label": "追踪与评分适配"
+    },
+    {
+      "id": "prom-scrape",
+      "from": "prometheus",
+      "to": "agent",
+      "label": "抓取应用指标"
+    },
+    {
+      "id": "grafana-query",
+      "from": "grafana",
+      "to": "prometheus",
+      "label": "PromQL"
+    },
+    {
+      "id": "agent-persist",
+      "from": "agent",
+      "to": "store",
+      "label": "持久化"
+    },
+    {
+      "id": "grafana-smtp",
+      "from": "grafana",
+      "to": "smtp",
+      "label": "原生通知策略",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "设计状态",
+      "items": [
+        "本图是拟建方案，不代表系统已运行。",
+        "Core 原生能力与应用适配以调研矩阵为准。"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "原生界面边界",
+      "items": [
+        "Portal 提供生命周期与能力导航。",
+        "Langfuse 负责追踪、数据集与实验详情。",
+        "Grafana 负责仪表盘、告警与通知配置。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "存储与验证",
+      "items": [
+        "Langfuse、Grafana、Prometheus 使用各自持久卷。",
+        "SMTP 未配置时只验证告警状态，不宣称邮件送达。",
+        "部署、A/B、回滚与自动审批均不在本轮范围。"
+      ]
+    }
+  ]
+}

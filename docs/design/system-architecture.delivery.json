@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "b01dc1a0-b70c-4de3-8fde-6e8fef3aa5ff",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Users/tianxiaoliang/Documents/Codex/2026-10-31/xian/work/design/architecture.json",
+  "output": "/Users/tianxiaoliang/Documents/Codex/2026-10-31/xian/outputs/agent-assurance/docs/design/system-architecture.html",
+  "specification": {
+    "sha256": "23cabe5da4ffdad2f88923f57a98f50dc73ca0cfb0719920f7806218750fb9e2",
+    "bytes": 5047
+  },
+  "artifact": {
+    "sha256": "773e8ef7b88731e45c85d0d4dfa7ee392a898f7d6a08e19178bd9d48d364522d",
+    "bytes": 848478
+  }
+}

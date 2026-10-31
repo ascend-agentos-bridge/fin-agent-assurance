@@ -1,0 +1,17 @@
+{
+  "scope": "research-and-design-only",
+  "status": "pass",
+  "markdownDocuments": 12,
+  "missingLocalLinks": 0,
+  "svgParsed": 3,
+  "architectureGates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "architectureSha256": "773e8ef7b88731e45c85d0d4dfa7ee392a898f7d6a08e19178bd9d48d364522d",
+  "architectureVisualReview": "not-requested; route-crossing advisory retained",
+  "productBuild": "not-run",
+  "productEndToEnd": "not-run"
+}

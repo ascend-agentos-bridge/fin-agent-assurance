@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/tianxiaoliang/Documents/Codex/2026-10-31/xian/work/design/architecture.json",
+    "sha256": "23cabe5da4ffdad2f88923f57a98f50dc73ca0cfb0719920f7806218750fb9e2",
+    "bytes": 5047
+  },
+  "artifact": {
+    "path": "/Users/tianxiaoliang/Documents/Codex/2026-10-31/xian/outputs/agent-assurance/docs/design/system-architecture.html",
+    "sha256": "773e8ef7b88731e45c85d0d4dfa7ee392a898f7d6a08e19178bd9d48d364522d",
+    "bytes": 848478
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/tianxiaoliang/Documents/Codex/2026-10-31/xian/work/design/architecture-final/system-architecture.finalize.json",
+    "summaryReceipt": "/Users/tianxiaoliang/Documents/Codex/2026-10-31/xian/work/design/architecture-final/system-architecture.finalize-summary.json",
+    "browserCheckReceipt": "/Users/tianxiaoliang/Documents/Codex/2026-10-31/xian/work/design/architecture-final/system-architecture.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-31T05:09:49.401Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 3337,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  },
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 1,
+      "routesOverSuggestedBends": 1
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "portal-grafana",
+            "from": "portal",
+            "to": "grafana",
+            "label": "新标签页",
+            "collectionIndex": 2,
+            "artifactIndex": 3
+          },
+          "right": {
+            "id": "agent-tracing",
+            "from": "agent",
+            "to": "langfuse",
+            "label": "追踪与评分适配",
+            "collectionIndex": 6,
+            "artifactIndex": 7
+          },
+          "point": [
+            244,
+            315
+          ]
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "agent-bank",
+            "from": "agent",
+            "to": "bank",
+            "label": "实际工具执行",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "bends": 3,
+          "stretch": 1.151
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "portal → grafana crosses agent → langfuse: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "agent → bank needs 3 bends: move node agent or bank so they share a row or column with matching centers, or sit diagonally with a clear corner."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}
